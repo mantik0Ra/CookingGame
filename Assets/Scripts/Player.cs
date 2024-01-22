@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float speed = 7f;
     private float rotationSpeed = 20f;
+
+    private bool isWalking = false;
     // Update is called once per frame
     void Update()
     {
@@ -30,6 +32,12 @@ public class Player : MonoBehaviour
         moveDir.Normalize();
         transform.position += moveDir * speed * Time.deltaTime;
 
+        isWalking = moveDir != Vector3.zero;
+
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
+    }
+
+    public bool IsWalking() {
+        return isWalking;
     }
 }
