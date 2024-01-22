@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
 
     [SerializeField] private float speed = 7f;
+    private float rotationSpeed = 20f;
     // Update is called once per frame
     void Update()
     {
@@ -27,5 +29,7 @@ public class Player : MonoBehaviour
         Vector3 moveDir = new Vector3(inputDir.x, 0, inputDir.y);
         moveDir.Normalize();
         transform.position += moveDir * speed * Time.deltaTime;
+
+        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
     }
 }
