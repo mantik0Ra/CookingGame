@@ -5,21 +5,14 @@ using UnityEngine;
 public class GameInput : MonoBehaviour
 {
     
-    public Vector3 GetMovementDirectonVectorNormalized() {
-        Vector2 inputDir = new Vector2(0, 0);
+    private InputActionsController inputActionsController;
 
-        if (Input.GetKey(KeyCode.W)) {
-            inputDir.y = 1;
-        }
-        if (Input.GetKey(KeyCode.S)) {
-            inputDir.y = -1;
-        }
-        if (Input.GetKey(KeyCode.D)) {
-            inputDir.x = 1;
-        }
-        if (Input.GetKey(KeyCode.A)) {
-            inputDir.x = -1;
-        }
+    private void Awake() {
+        inputActionsController = new InputActionsController();
+        inputActionsController.Player.Enable();
+    }
+    public Vector3 GetMovementDirectonVectorNormalized() {
+        Vector2 inputDir = inputActionsController.Player.Move.ReadValue<Vector2>();
 
         Vector3 moveDir = new Vector3(inputDir.x, 0, inputDir.y);
         moveDir.Normalize();
