@@ -7,29 +7,15 @@ public class Player : MonoBehaviour
 {
 
     [SerializeField] private float speed = 7f;
+    [SerializeField] private GameInput gameInput;
     private float rotationSpeed = 20f;
 
     private bool isWalking = false;
+
     // Update is called once per frame
     void Update()
     {
-        Vector2 inputDir = new Vector2(0, 0);
-
-        if(Input.GetKey(KeyCode.W)) {
-            inputDir.y = 1;
-        }
-        if (Input.GetKey(KeyCode.S)) {
-            inputDir.y = -1;
-        }
-        if (Input.GetKey(KeyCode.D)) {
-            inputDir.x = 1;
-        }
-        if (Input.GetKey(KeyCode.A)) {
-            inputDir.x = -1;
-        }
-
-        Vector3 moveDir = new Vector3(inputDir.x, 0, inputDir.y);
-        moveDir.Normalize();
+        Vector3 moveDir = gameInput.GetMovementDirectonVectorNormalized();
         transform.position += moveDir * speed * Time.deltaTime;
 
         isWalking = moveDir != Vector3.zero;
