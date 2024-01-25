@@ -15,10 +15,19 @@ public class Player : MonoBehaviour
     private Vector3 lastMoveVector = new Vector3(0, 0, 0);
 
     // Update is called once per frame
+
+    private void Start() {
+        gameInput.InteractEvent += GameInputInteractEvent;
+    }
+
+    private void GameInputInteractEvent(object sender, System.EventArgs e) {
+        HandleInteractions();
+    }
+
     void Update()
     {
         HandleMovement();
-        HandleInteractions();
+        
     }
 
     public bool IsWalking() {
