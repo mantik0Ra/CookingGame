@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     private float rotationSpeed = 20f;
 
     private bool isWalking = false;
-    private Vector3 moveDir = new Vector3 (0, 0, 0);
     private Vector3 lastMoveVector = new Vector3(0, 0, 0);
 
     // Update is called once per frame
@@ -28,7 +27,7 @@ public class Player : MonoBehaviour
 
     private void HandleMovement() {
 
-        moveDir = gameInput.GetMovementDirectonVectorNormalized();
+        Vector3 moveDir = gameInput.GetMovementDirectonVectorNormalized();
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
 
         float playerSize = .1f;
@@ -65,12 +64,16 @@ public class Player : MonoBehaviour
     }
 
     private void HandleInteractions() {
+        Vector3 moveDir = gameInput.GetMovementDirectonVectorNormalized();
 
-        if(moveDir != Vector3.zero) lastMoveVector = moveDir;
+        if (moveDir != Vector3.zero) lastMoveVector = moveDir;
 
         float maxDistance = 1f;
         if(Physics.Raycast(transform.position, lastMoveVector, out RaycastHit raycastHit, maxDistance, layerMask)) {
-            Debug.Log("Interact!");
+            if(raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
+                clearCounter.Interact();
+            }
+            
         }
     }
 
