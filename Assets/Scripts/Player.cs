@@ -8,14 +8,18 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float speed = 7f;
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private LayerMask layerMask;
     private float rotationSpeed = 20f;
 
     private bool isWalking = false;
+    private Vector3 moveDir = new Vector3 (0, 0, 0);
+    private Vector3 lastMoveVector = new Vector3(0, 0, 0);
 
     // Update is called once per frame
     void Update()
     {
         HandleMovement();
+        HandleInteractions();
     }
 
     public bool IsWalking() {
@@ -24,11 +28,12 @@ public class Player : MonoBehaviour
 
     private void HandleMovement() {
 
-        Vector3 moveDir = gameInput.GetMovementDirectonVectorNormalized();
+        moveDir = gameInput.GetMovementDirectonVectorNormalized();
 
         float playerSize = .1f;
         float playerRadius = .7f;
         float playerHeight = 2f;
+
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, playerSize);
         if (!canMove) {
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0);
@@ -55,6 +60,16 @@ public class Player : MonoBehaviour
 
         isWalking = moveDir != Vector3.zero;
 
-        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
+        
+    }
+
+    private void HandleInteractions() {
+
+        if(moveDir != Vector3.zero) lastMoveVector = moveDir;
+
+        float maxDistance = 1f;
+        if(Physics.Raycast(transform.position, lastMoveVector, out RaycastHit raycastHit, maxDistance, layerMask)) {
+            Debug.Log("Interact!");
+        }
     }
 }
