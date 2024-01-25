@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         HandleMovement();
+        HandleRotation();
         HandleInteractions();
     }
 
@@ -60,7 +61,6 @@ public class Player : MonoBehaviour
 
         isWalking = moveDir != Vector3.zero;
 
-        
     }
 
     private void HandleInteractions() {
@@ -71,5 +71,9 @@ public class Player : MonoBehaviour
         if(Physics.Raycast(transform.position, lastMoveVector, out RaycastHit raycastHit, maxDistance, layerMask)) {
             Debug.Log("Interact!");
         }
+    }
+
+    private void HandleRotation() {
+        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
     }
 }
