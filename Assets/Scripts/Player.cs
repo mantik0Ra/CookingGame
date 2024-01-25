@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         HandleMovement();
-        HandleRotation();
         HandleInteractions();
     }
 
@@ -30,6 +29,7 @@ public class Player : MonoBehaviour
     private void HandleMovement() {
 
         moveDir = gameInput.GetMovementDirectonVectorNormalized();
+        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
 
         float playerSize = .1f;
         float playerRadius = .7f;
@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
 
         isWalking = moveDir != Vector3.zero;
 
+        
     }
 
     private void HandleInteractions() {
@@ -73,7 +74,4 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void HandleRotation() {
-        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
-    }
 }
