@@ -7,14 +7,50 @@ using UnityEngine;
 public class ClearCounter : MonoBehaviour
 {
 
-    [SerializeField] private KitchenObjectSO kitchenObject;
+    [SerializeField] private KitchenObjectSO kitchenObjectSO;
     [SerializeField] private Transform counterObjectPosition;
+    [SerializeField] private ClearCounter secondClearCounter;
 
-    
+    private KitchenObject kitchenObject;
+    private bool testing = false;
+
+    private void Update() {
+        if(testing && Input.GetKeyDown(KeyCode.T)) {
+            if(kitchenObject != null) {
+                kitchenObject.SetClearCounter(secondClearCounter);
+                
+            }
+        }
+    }
+
     public void Interact() {
-        Transform kitchenObjectTransform = Instantiate(kitchenObject.prefab, counterObjectPosition);
-        kitchenObjectTransform.localPosition = Vector3.zero;
+        if (kitchenObject == null) {
+            Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab, counterObjectPosition);
+            kitchenObjectTransform.GetComponent<KitchenObject>().SetClearCounter(this);
+            testing = true;
+        } else {
+            Debug.Log(kitchenObject.GetClearCounter());
+        }
+      
+    }
 
-        Debug.Log(kitchenObjectTransform.GetComponent<KitchenObject>().GetKitchenObject().name);
+    public Transform GetKitchenObjectFollowTransform() {
+        return counterObjectPosition;
+    }
+
+    public void SetKitchenObject(KitchenObject kitchenObject) {
+        this.kitchenObject = kitchenObject;
+    }
+
+    public KitchenObject GetKitchenObject() {
+        return kitchenObject;
+    }
+
+    public void ClearKitchenObject() {
+        kitchenObject = null;
+    }
+
+    public bool HasKitchenObject() {
+        return kitchenObject != null;
     }
 }

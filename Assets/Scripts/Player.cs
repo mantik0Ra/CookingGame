@@ -83,8 +83,7 @@ public class Player : MonoBehaviour
         if (canMove) {
             transform.position += moveDir * speed * Time.deltaTime;
         }
-
-
+        
         isWalking = moveDir != Vector3.zero;
 
         
