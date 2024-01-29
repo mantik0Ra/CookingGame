@@ -1134,6 +1134,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 3457466953942184569, guid: 67b30f1c788d2de4daeb41bce4ef748d,
         type: 3}
+      propertyPath: secondClearCounter
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457466953942184569, guid: 67b30f1c788d2de4daeb41bce4ef748d,
+        type: 3}
       propertyPath: counterObjectPosition
       value: 
       objectReference: {fileID: 2135204195}

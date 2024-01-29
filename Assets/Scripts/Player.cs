@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IKitchenObjectParent
 {
 
     public static Player Instance { get; private set; }
@@ -12,8 +12,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed = 7f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask layerMask;
-    private float rotationSpeed = 20f;
+    [SerializeField] private Transform holdKitchenObjectTopPosition;
 
+    private KitchenObject kitchenObject;
+
+
+    private float rotationSpeed = 20f;
     private bool isWalking = false;
     private Vector3 lastMoveVector = new Vector3(0, 0, 0);
 
@@ -38,7 +42,7 @@ public class Player : MonoBehaviour
 
     private void GameInputInteractEvent(object sender, System.EventArgs e) {
         if(selectedCounter != null) {
-            selectedCounter.Interact();
+            selectedCounter.Interact(this);
         }
     }
 
@@ -116,6 +120,26 @@ public class Player : MonoBehaviour
             selectedCounter = selectedCounter
         });
 
+    }
+
+    public Transform GetKitchenObjectFollowTransform() {
+        return holdKitchenObjectTopPosition;
+    }
+
+    public void SetKitchenObject(KitchenObject kitchenObject) {
+        this.kitchenObject = kitchenObject;
+    }
+
+    public KitchenObject GetKitchenObject() {
+        return kitchenObject;
+    }
+
+    public void ClearKitchenObject() {
+        kitchenObject = null;
+    }
+
+    public bool HasKitchenObject() {
+        return kitchenObject != null;
     }
 
 }
