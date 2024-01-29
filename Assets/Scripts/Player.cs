@@ -21,10 +21,10 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     private bool isWalking = false;
     private Vector3 lastMoveVector = new Vector3(0, 0, 0);
 
-    private ClearCounter selectedCounter;
+    private BaseCounter selectedCounter;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs {
-        public ClearCounter selectedCounter;
+        public BaseCounter selectedCounter;
     }
 
     // Update is called once per frame
@@ -100,8 +100,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
         float maxDistance = 1f;
         if (Physics.Raycast(transform.position, lastMoveVector, out RaycastHit raycastHit, maxDistance, layerMask)) {
-            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                SetSelectedCounter(clearCounter);
+            if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter)) {
+                SetSelectedCounter(baseCounter);
             }
             else {
                 SetSelectedCounter(null);
@@ -113,8 +113,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         
     }
 
-    private void SetSelectedCounter(ClearCounter clearCounter) {
-        selectedCounter = clearCounter;
+    private void SetSelectedCounter(BaseCounter baseCounter) {
+        selectedCounter = baseCounter;
 
         OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs {
             selectedCounter = selectedCounter

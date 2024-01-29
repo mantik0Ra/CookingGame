@@ -5,7 +5,7 @@ using UnityEngine;
 public class OnSelectedCounter : MonoBehaviour
 {
 
-    [SerializeField] private ClearCounter clearCounter;
+    [SerializeField] private BaseCounter clearCounter;
     [SerializeField] private GameObject visualClearCounter;
 
     private void Start() {
