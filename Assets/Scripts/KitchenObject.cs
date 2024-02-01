@@ -6,11 +6,20 @@ public class KitchenObject : MonoBehaviour
 {
 
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
+    [SerializeField] private KitchenObjectSO slicedKitchenObject;
 
     private IKitchenObjectParent kitchenObjectParent;
     
     public KitchenObjectSO GetKitchenObject() {
         return kitchenObjectSO;
+    }
+
+    public KitchenObjectSO GetSlicedKitchenObject() {
+        return slicedKitchenObject;
+    }
+
+    public bool IsSliced() {
+        return kitchenObjectSO.IsSliced;
     }
 
     public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent) {
@@ -42,6 +51,7 @@ public class KitchenObject : MonoBehaviour
         Transform transformObject = Instantiate(kitchenObjectSO.prefab);
 
         KitchenObject kitchenObject = transformObject.GetComponent<KitchenObject>();
+        Debug.Log(transformObject);
 
         kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
 

@@ -8,4 +8,5 @@ public class KitchenObjectSO : ScriptableObject
     public string name;
     public Transform prefab;
     public Sprite sprite;
+    public bool IsSliced;
 }

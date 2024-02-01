@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7140df3e033a147428772191458c916f, type: 3}
   m_Name: MeatUncooked
   m_EditorClassIdentifier: 
-  name: Meat
-  prefab: {fileID: 0}
+  name: MeatUncooked
+  prefab: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
   sprite: {fileID: 21300000, guid: aa1bacc24dde76e47b2ec0dd4e82385b, type: 3}
+  IsSliced: 0
