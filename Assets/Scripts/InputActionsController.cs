@@ -44,6 +44,15 @@ public partial class @InputActionsController: IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AlternateInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""dfbf66b7-e34c-496a-8d3d-962c4ff086f1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +121,17 @@ public partial class @InputActionsController: IInputActionCollection2, IDisposab
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20803ffa-e570-41e3-9255-f99df252bdf9"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AlternateInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +142,7 @@ public partial class @InputActionsController: IInputActionCollection2, IDisposab
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_AlternateInteract = m_Player.FindAction("AlternateInteract", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,12 +206,14 @@ public partial class @InputActionsController: IInputActionCollection2, IDisposab
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_AlternateInteract;
     public struct PlayerActions
     {
         private @InputActionsController m_Wrapper;
         public PlayerActions(@InputActionsController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @AlternateInteract => m_Wrapper.m_Player_AlternateInteract;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -206,6 +229,9 @@ public partial class @InputActionsController: IInputActionCollection2, IDisposab
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @AlternateInteract.started += instance.OnAlternateInteract;
+            @AlternateInteract.performed += instance.OnAlternateInteract;
+            @AlternateInteract.canceled += instance.OnAlternateInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -216,6 +242,9 @@ public partial class @InputActionsController: IInputActionCollection2, IDisposab
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @AlternateInteract.started -= instance.OnAlternateInteract;
+            @AlternateInteract.performed -= instance.OnAlternateInteract;
+            @AlternateInteract.canceled -= instance.OnAlternateInteract;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -237,5 +266,6 @@ public partial class @InputActionsController: IInputActionCollection2, IDisposab
     {
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnAlternateInteract(InputAction.CallbackContext context);
     }
 }

@@ -7,10 +7,19 @@ using UnityEngine;
 public class ClearCounter : BaseCounter
 {
 
-    [SerializeField] private KitchenObjectSO kitchenObjectSO;
-
     public override void Interact(Player player) {
-        
+        if(!HasKitchenObject()) {
+            // There is no kitchenObject
+            if(player.HasKitchenObject()) {
+                player.GetKitchenObject().SetKitchenObjectParent(this);
+            }
+
+        } else {
+            // There is has kitchenObject
+            if(!player.HasKitchenObject()) {
+                GetKitchenObject().SetKitchenObjectParent(player);
+            }
+        }
     }
 
 }

@@ -11,8 +11,8 @@ public class ContainerCounter : BaseCounter
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
     public override void Interact(Player player) {
-        Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
-        kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
+        if (player.HasKitchenObject()) return;
+        KitchenObject.SpawnKitchenObject(kitchenObjectSO, player);
         ContainerCounterEventAnim.Invoke(this, EventArgs.Empty);
     }
 

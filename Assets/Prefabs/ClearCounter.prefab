@@ -74,8 +74,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3156237648408538202}
   - component: {fileID: 2510698526428591453}
-  - component: {fileID: 3457466953942184569}
   - component: {fileID: 1973713806242931911}
+  - component: {fileID: 5230093616223221567}
   m_Layer: 6
   m_Name: ClearCounter
   m_TagString: Untagged
@@ -122,21 +122,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.44, y: 1.56, z: 1.48}
   m_Center: {x: 0, y: 0.49, z: 0}
---- !u!114 &3457466953942184569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4722844593868809595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe07451ccdb659b4f9ff4ef4f1a4e831, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kitchenObjectSO: {fileID: 11400000, guid: b67bc43069000004b8884cec76ef8ec6, type: 2}
-  counterObjectPosition: {fileID: 2203269218135121959}
-  secondClearCounter: {fileID: 0}
 --- !u!114 &1973713806242931911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,8 +134,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 814946fbf1b144a41b6adf93c3a07663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearCounter: {fileID: 3457466953942184569}
+  clearCounter: {fileID: 5230093616223221567}
   visualClearCounter: {fileID: 6005194948124427945}
+--- !u!114 &5230093616223221567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722844593868809595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c77b2cb630cbb47b2746ce1e3c3ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  counterObjectPosition: {fileID: 2203269218135121959}
 --- !u!1 &5266704147028207765
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +174,7 @@ Transform:
   m_GameObject: {fileID: 5266704147028207765}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.193, z: 0}
+  m_LocalPosition: {x: 0, y: 1.261, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

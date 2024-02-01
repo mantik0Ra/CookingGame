@@ -8,16 +8,24 @@ public class GameInput : MonoBehaviour
     
     private InputActionsController inputActionsController;
     public event EventHandler InteractEvent;
+    public event EventHandler AlternateInteractEvent;
 
     private void Awake() {
         inputActionsController = new InputActionsController();
         inputActionsController.Player.Enable();
-        inputActionsController.Player.Interact.performed += Interact_performed; 
+        inputActionsController.Player.Interact.performed += Interact_performed;
+        inputActionsController.Player.AlternateInteract.performed += AlternateInteract_performed; ;
+    }
+
+    private void AlternateInteract_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        AlternateInteractEvent.Invoke(obj, EventArgs.Empty);
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         InteractEvent?.Invoke(obj, EventArgs.Empty);
     }
+
+
 
     public Vector3 GetMovementDirectonVectorNormalized() {
         Vector2 inputDir = inputActionsController.Player.Move.ReadValue<Vector2>();
