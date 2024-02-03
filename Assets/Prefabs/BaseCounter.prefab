@@ -89,7 +89,7 @@ PrefabInstance:
     - target: {fileID: 4722844593868809595, guid: 67b30f1c788d2de4daeb41bce4ef748d,
         type: 3}
       propertyPath: m_Name
-      value: ClearCounter (2) Variant
+      value: BaseCounter
       objectReference: {fileID: 0}
     - target: {fileID: 4722844593868809595, guid: 67b30f1c788d2de4daeb41bce4ef748d,
         type: 3}
@@ -104,6 +104,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1973713806242931911, guid: 67b30f1c788d2de4daeb41bce4ef748d, type: 3}
     - {fileID: 3457466953942184569, guid: 67b30f1c788d2de4daeb41bce4ef748d, type: 3}
+    - {fileID: 5230093616223221567, guid: 67b30f1c788d2de4daeb41bce4ef748d, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4464339734529335226, guid: 67b30f1c788d2de4daeb41bce4ef748d, type: 3}
     m_AddedGameObjects: []
