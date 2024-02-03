@@ -95,9 +95,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
             transform.position += moveDir * speed * Time.deltaTime;
         }
         
-        isWalking = moveDir != Vector3.zero;
-
-        
+        isWalking = moveDir != Vector3.zero;       
     }
 
     private void HandleInteractions() {

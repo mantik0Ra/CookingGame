@@ -29,8 +29,8 @@ public class GameInput : MonoBehaviour
 
     public Vector3 GetMovementDirectonVectorNormalized() {
         Vector2 inputDir = inputActionsController.Player.Move.ReadValue<Vector2>();
-
         Vector3 moveDir = new Vector3(inputDir.x, 0, inputDir.y);
+        Debug.Log(moveDir);
         moveDir.Normalize();
         return moveDir;
     }

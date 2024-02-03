@@ -6,20 +6,32 @@ public class KitchenObject : MonoBehaviour
 {
 
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
-    [SerializeField] private KitchenObjectSO slicedKitchenObject;
+    [SerializeField] private SlicebleKitchenObjectSO slicedKitchenObject;
 
     private IKitchenObjectParent kitchenObjectParent;
+
+    private float currentProgress = 0f;
+    
     
     public KitchenObjectSO GetKitchenObject() {
         return kitchenObjectSO;
     }
 
-    public KitchenObjectSO GetSlicedKitchenObject() {
+    public SlicebleKitchenObjectSO GetSlicedKitchenObject() {
         return slicedKitchenObject;
     }
 
     public bool IsSliced() {
         return kitchenObjectSO.IsSliced;
+    }
+
+    public float GetCurrentProgressOfCutting() {
+        return currentProgress;
+    }
+
+    public void ChangeCurrentProgressOfCutting(float amount) {
+        if (!IsSliced()) return;
+        currentProgress += amount;
     }
 
     public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent) {
@@ -51,8 +63,16 @@ public class KitchenObject : MonoBehaviour
         Transform transformObject = Instantiate(kitchenObjectSO.prefab);
 
         KitchenObject kitchenObject = transformObject.GetComponent<KitchenObject>();
-        Debug.Log(transformObject);
+        kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
 
+        return kitchenObject;
+    }
+
+    public static KitchenObject SpawnKitchenObject(SlicebleKitchenObjectSO kitchenObjectSO, IKitchenObjectParent kitchenObjectParent) {
+        Transform transformObject = Instantiate(kitchenObjectSO.prefab);
+
+        KitchenObject kitchenObject = transformObject.GetComponent<KitchenObject>();
+        
         kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
 
         return kitchenObject;
