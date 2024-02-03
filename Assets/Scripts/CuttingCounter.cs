@@ -17,8 +17,11 @@ public class CuttingCounter : BaseCounter
             // There is no kitchenObject
             if (player.HasKitchenObject()) {
                 player.GetKitchenObject().SetKitchenObjectParent(this);
-                progressBar.SetProgressVisible(true);
-                progressBar.SetProgressBar(GetKitchenObject().GetCurrentProgressOfCutting());
+                if(GetKitchenObject().IsSliced()) {
+                    progressBar.SetProgressVisible(true);
+                    progressBar.SetProgressBar(GetKitchenObject().GetCurrentProgressOfCutting());
+                }
+                
             }
 
         }
