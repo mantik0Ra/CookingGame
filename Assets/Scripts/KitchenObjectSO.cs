@@ -9,4 +9,5 @@ public class KitchenObjectSO : ScriptableObject
     public Transform prefab;
     public Sprite sprite;
     public bool IsSliced;
+    public bool IsNeedCook;
 }

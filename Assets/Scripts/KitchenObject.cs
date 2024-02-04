@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KitchenObject : MonoBehaviour
-{
+public class KitchenObject : MonoBehaviour {
 
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
     [SerializeField] private SlicebleKitchenObjectSO slicedKitchenObject;
@@ -11,8 +10,7 @@ public class KitchenObject : MonoBehaviour
     private IKitchenObjectParent kitchenObjectParent;
 
     private float currentProgress = 0f;
-    
-    
+
     public KitchenObjectSO GetKitchenObject() {
         return kitchenObjectSO;
     }
@@ -23,6 +21,10 @@ public class KitchenObject : MonoBehaviour
 
     public bool IsSliced() {
         return kitchenObjectSO.IsSliced;
+    }
+
+    public bool IsNeedCook() {
+        return kitchenObjectSO.IsNeedCook;
     }
 
     public float GetCurrentProgressOfCutting() {
@@ -77,4 +79,5 @@ public class KitchenObject : MonoBehaviour
 
         return kitchenObject;
     }
+
 }
