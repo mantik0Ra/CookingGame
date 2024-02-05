@@ -8,6 +8,8 @@ public class StoveCounter : BaseCounter
 
     
     [SerializeField] UncookedSO UncookedSO;
+    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] GameObject effectOfCooking;
 
     private float cookedTime = 0f;
     private bool isCooking = false;
@@ -34,7 +36,10 @@ public class StoveCounter : BaseCounter
                 Debug.Log(state);
                 state = SetCurrentState();
                 isCooking = true;
-                
+                SetEffectOfCooking(true);
+                SetPartcleOfCooking(true);
+
+
             }
 
         }
@@ -43,6 +48,10 @@ public class StoveCounter : BaseCounter
             if (!player.HasKitchenObject()) {
                 isCooking = false;
                 GetKitchenObject().SetKitchenObjectParent(player);
+                SetEffectOfCooking(false);
+                SetPartcleOfCooking(false);
+                progressBar.SetProgressVisible(false);
+                cookedTime = 0f;
             }
         }
     }
@@ -60,12 +69,14 @@ public class StoveCounter : BaseCounter
         if(cookedTime < UncookedSO.cookedTime) {
             cookedTime += Time.deltaTime;
             progressBar.SetProgressVisible(true);
+            
             progressBar.SetProgressBar(cookedTime / 3); // max progress is 1, so we need devide to 3 for getting procent of cookedTime
 
 
         } else {
             cookedTime = 0;
             progressBar.SetProgressVisible(false);
+            
             GetKitchenObject().DestroySelf();
             switch (state) {
                 case State.Uncooked: // Uncooked
@@ -92,6 +103,18 @@ public class StoveCounter : BaseCounter
             num++;
         }
         return (State)num;
+    }
+
+    private void SetEffectOfCooking(bool turn) {
+        effectOfCooking.SetActive(turn);
+    }
+
+    private void SetPartcleOfCooking(bool turn) {
+        if(turn is true) {
+            particleSystem.Play();
+        } else {
+            particleSystem.Stop();
+        }
     }
 
 
