@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543dc35f4b1f1a04f9f063e5abb1c8cb, type: 3}
   m_Name: MeatStates
   m_EditorClassIdentifier: 
-  name: 
-  uncookedPrefab: {fileID: 0}
-  cookedPrefab: {fileID: 0}
-  burnedPrefab: {fileID: 0}
+  name: MeatStates
+  cookedPrefabs:
+  - {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+  - {fileID: 3812876574508226176, guid: e879ff1414d1dd64c9ad7b04bffdfaef, type: 3}
+  - {fileID: 3812876574508226176, guid: 0df961a7e3870b44f9bbce7bdf930613, type: 3}
+  uncookedPrefab: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f,
+    type: 3}
+  cookedPrefab: {fileID: 3812876574508226176, guid: e879ff1414d1dd64c9ad7b04bffdfaef,
+    type: 3}
+  burnedPrefab: {fileID: 3812876574508226176, guid: 0df961a7e3870b44f9bbce7bdf930613,
+    type: 3}
+  cookedTime: 3

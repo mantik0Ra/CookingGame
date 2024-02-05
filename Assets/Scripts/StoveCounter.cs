@@ -11,6 +11,7 @@ public class StoveCounter : BaseCounter
 
     private float cookedTime = 0f;
     private bool isCooking = false;
+    private ProgressCuttingBar progressBar;
 
     private enum State : int {
         Uncooked,
@@ -19,7 +20,11 @@ public class StoveCounter : BaseCounter
     }
 
     State state = State.Uncooked;
-    
+
+    private void Start() {
+        progressBar = GetComponent<ProgressCuttingBar>();
+    }
+
     public override void Interact(Player player) {
         if (!HasKitchenObject()) {
             // There is no kitchenObject
@@ -29,6 +34,7 @@ public class StoveCounter : BaseCounter
                 Debug.Log(state);
                 state = SetCurrentState();
                 isCooking = true;
+                
             }
 
         }
@@ -53,9 +59,13 @@ public class StoveCounter : BaseCounter
 
         if(cookedTime < UncookedSO.cookedTime) {
             cookedTime += Time.deltaTime;
+            progressBar.SetProgressVisible(true);
+            progressBar.SetProgressBar(cookedTime / 3); // max progress is 1, so we need devide to 3 for getting procent of cookedTime
+
 
         } else {
             cookedTime = 0;
+            progressBar.SetProgressVisible(false);
             GetKitchenObject().DestroySelf();
             switch (state) {
                 case State.Uncooked: // Uncooked
