@@ -31,6 +31,7 @@ public class GameInput : MonoBehaviour
         Vector2 inputDir = inputActionsController.Player.Move.ReadValue<Vector2>();
         Vector3 moveDir = new Vector3(inputDir.x, 0, inputDir.y);
         moveDir.Normalize();
+        
         return moveDir;
     }
 
